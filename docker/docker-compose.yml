@@ -1,0 +1,38 @@
+
+version: '2'
+
+services:
+    db:
+        build: ./mysql
+        ports:
+            - $MYSQL_PORT:3306
+        volumes:
+            - ./mysql/db:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+            MYSQL_DATABASE: $MYSQL_DATABASE
+    php:
+        build:
+            context: ./php-fpm
+            args:
+                PUID: $PUID
+                PGID: $PGID
+        links:
+            - db
+        working_dir: /var/www
+        environment:
+            SYMFONY__MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+            SYMFONY__MYSQL_DATABASE: $MYSQL_DATABASE
+        volumes:
+            - ../:/var/www
+    nginx:
+        build:
+            context: ./nginx
+            args:
+                ENVIRONMENT: $ENVIRONMENT
+        ports:
+            - $NGINX_PORT:80
+        links:
+            - php
+        volumes_from:
+            - php
