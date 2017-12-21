@@ -1,7 +1,25 @@
 <?php
+
+namespace AppBundle\Entity;
+
+use FOS\OAuthServerBundle\Entity\Client as BaseClient;
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Created by PhpStorm.
- * User: vasyl
- * Date: 14.12.17
- * Time: 14:28
+ * @ORM\Table("oauth2_clients")
+ * @ORM\Entity
  */
+class Client extends BaseClient
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
