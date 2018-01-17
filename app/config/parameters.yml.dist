@@ -5,10 +5,10 @@ parameters:
     database_host:     ink_db
     database_port:     ~
     # Grabbed from environment SYMFONY__MYSQL_DATABASE
-    database_name:     %mysql_database%
+    database_name:     '%env(MYSQL_DATABASE)%'
     database_user:     root
     # Grabbed from environment SYMFONY__MYSQL_ROOT_PASSWORD
-    database_password: %mysql_root_password%
+    database_password: '%env(MYSQL_ROOT_PASSWORD)%'
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

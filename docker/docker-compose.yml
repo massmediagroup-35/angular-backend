@@ -21,8 +21,8 @@ services:
             - db
         working_dir: /var/www
         environment:
-            SYMFONY__MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-            SYMFONY__MYSQL_DATABASE: $MYSQL_DATABASE
+            MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+            MYSQL_DATABASE: $MYSQL_DATABASE
         volumes:
             - ../:/var/www
     nginx:
